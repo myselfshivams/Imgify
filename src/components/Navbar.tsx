@@ -49,14 +49,18 @@ const ProfileButton = styled.div`
   background-position: center;
 `;
 
-const DropdownMenu = styled.div`
+interface DropdownMenuProps {
+  visible: boolean;
+}
+
+const DropdownMenu = styled.div<DropdownMenuProps>`
   position: absolute;
   top: 60px; /* Adjust based on your layout */
   right: 20px; /* Adjust based on your layout */
   background: rgba(0, 0, 0, 0.8);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: ${({ visible }: { visible: boolean }) => (visible ? 'block' : 'none')};
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
   z-index: 1001;
 `;
 
