@@ -1,26 +1,70 @@
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faSignInAlt, faDownload, faUsers } from '@fortawesome/free-solid-svg-icons';
+import styles from '../styles/Home.module.css'; 
+import Navbar from '@/components/Navbar';
 
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import styles from '@/styles/Home.module.css';
+const useCases = [
+  {
+    title: 'Dynamic Branding and Customization',
+    icon: faStar, 
+  },
+  {
+    title: 'Login and Signup Pages',
+    icon: faSignInAlt,
+  },
+  {
+    title: 'Downloadable Custom Images',
+    icon: faDownload,
+  },
+  {
+    title: 'Interactive User Interfaces',
+    icon: faUsers,
+  },
+];
 
-const Home: NextPage = () => {
+const IndexPage = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const router = useRouter();
+
+  const handleSearch = () => {
+    router.push(`/api/${encodeURIComponent(searchTerm)}`);
+  };
+
   return (
     <>
-      <Head>
-        <title>Home Page</title>
-        <meta name="description" content="This is the home page of the website." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to the Home Page!
-        </h1>
-        <p className={styles.description}>
-          This is a simple landing page to showcase the Imigify.
-        </p>
-      </main>
+      <Navbar />
+      <div className={styles.pageContainer}>
+        <h1 className={styles.heading}>Welcome to imgify</h1>
+
+        <div className={styles.cardContainer}>
+          {useCases.map((useCase, index) => (
+            <div className={styles.card} key={index}>
+              <FontAwesomeIcon 
+                icon={useCase.icon} 
+                className={styles.cardIcon} 
+              />
+              <h2 className={styles.cardTitle}>{useCase.title}</h2>
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder="Enter Text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
+          <button onClick={handleSearch} className={styles.searchButton}>
+            Search
+          </button>
+        </div>
+      </div>
     </>
   );
 };
 
-export default Home;
+export default IndexPage;

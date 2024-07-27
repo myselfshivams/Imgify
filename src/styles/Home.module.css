@@ -1,22 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
+.pageContainer {
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e1e1e, #333);
+  height: 100vh;
+  position: relative; /* Ensure container is positioned relative for absolute positioning of search bar */
+}
 
-.main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 0 2rem;
-    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Example gradient */
-    color: white;
-  }
-  
-  .title {
-    font-size: 4rem;
-    text-align: center;
-  }
-  
-  .description {
-    font-size: 1.5rem;
-    text-align: center;
-  }
+.heading {
+  margin-top: 100px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 40px;
+  color: #ffffff;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cardIcon {
+  font-size: 30px; 
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cardTitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.searchContainer {
+  position: absolute; 
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.searchInput {
+  padding: 18px 20px;
+  border: none;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  font-size: 16px;
+  width: 900px; 
+  max-width: 100%; 
+}
+
+.searchInput::placeholder {
+  color: #ffffff;
+  opacity: 0.8;
+}
+
+.searchButton {
+  background: rgba(255, 255, 255, 0.2); /* Glassmorphism effect */
+  color: #ffffff;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+ 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-left: 15px; /* Overlap the search input slightly */
+}
+
+.searchButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.searchButton:active {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
