@@ -102,7 +102,7 @@ const Navbar: React.FC = () => {
 
     setUser({
       name: userName,
-      profileImage: profilePicture || '/user.jpg', // Fallback to default image
+      profileImage: profilePicture || '/user.png', // Fallback to default image
     });
   };
 
