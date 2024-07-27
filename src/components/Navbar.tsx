@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 
+// Styled components
 const NavbarContainer = styled.nav`
   position: fixed;
   top: 0;
@@ -46,8 +49,42 @@ const ProfileButton = styled.div`
   background-position: center;
 `;
 
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 60px; /* Adjust based on your layout */
+  right: 20px; /* Adjust based on your layout */
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: ${({ visible }: { visible: boolean }) => (visible ? 'block' : 'none')};
+  z-index: 1001;
+`;
+
+const DropdownItem = styled.div`
+  padding: 10px 20px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: rgba(255, 0, 0, 0.3);
+  }
+  
+  &.logout {
+    color: red;
+  }
+  
+  & .icon {
+    margin-right: 10px;
+  }
+`;
+
 const Navbar: React.FC = () => {
   const [user, setUser] = useState<{ name?: string; profileImage?: string } | null>(null);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const handleSuccess = (credentialResponse: any) => {
     console.log('Login successful:', credentialResponse);
@@ -70,12 +107,20 @@ const Navbar: React.FC = () => {
     // Handle login error
   };
 
+  const handleLogout = () => {
+    // Handle logout logic
+    setUser(null);
+    setDropdownVisible(false);
+  };
+
   return (
     <NavbarContainer>
       <Logo>Imgify</Logo>
       {user ? (
-        <ProfileButton style={{ backgroundImage: `url(${user.profileImage})` }}>
-          {/* Display the user's initial if profile image is not available */}
+        <ProfileButton
+          style={{ backgroundImage: `url(${user.profileImage})` }}
+          onClick={() => setDropdownVisible(!dropdownVisible)}
+        >
           {!user.profileImage && user.name ? user.name.charAt(0).toUpperCase() : ''}
         </ProfileButton>
       ) : (
@@ -84,6 +129,16 @@ const Navbar: React.FC = () => {
           onError={handleError}
         />
       )}
+      <DropdownMenu visible={dropdownVisible}>
+        <DropdownItem onClick={() => console.log('Navigate to profile')}>
+          <FontAwesomeIcon icon={faUser} className="icon" />
+          My Profile
+        </DropdownItem>
+        <DropdownItem className="logout" onClick={handleLogout}>
+          <FontAwesomeIcon icon={faSignOutAlt} className="icon" />
+          Logout
+        </DropdownItem>
+      </DropdownMenu>
     </NavbarContainer>
   );
 };
