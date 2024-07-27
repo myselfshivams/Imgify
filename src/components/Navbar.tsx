@@ -57,11 +57,13 @@ const DropdownMenu = styled.div<DropdownMenuProps>`
   position: absolute;
   top: 60px; /* Adjust based on your layout */
   right: 20px; /* Adjust based on your layout */
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   z-index: 1001;
+  width: 200px; /* Adjust width as needed */
 `;
 
 const DropdownItem = styled.div`
@@ -83,6 +85,13 @@ const DropdownItem = styled.div`
   
   & .icon {
     margin-right: 10px;
+    font-size: 18px; /* Ensure both icons are the same size */
+  }
+  
+  & .text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
@@ -93,26 +102,22 @@ const Navbar: React.FC = () => {
   const handleSuccess = (credentialResponse: any) => {
     console.log('Login successful:', credentialResponse);
 
-    // Check the structure of credentialResponse
     console.log('Credential Response:', credentialResponse);
 
-    // Extract the user's name and profile picture from the credential response
     const userName = credentialResponse?.profileObj?.name || '';
     const profilePicture = credentialResponse?.profileObj?.picture || '';
 
     setUser({
       name: userName,
-      profileImage: profilePicture || '/user.png', // Fallback to default image
+      profileImage: profilePicture || '/user.png', 
     });
   };
 
   const handleError = () => {
     console.error('Login failed');
-    // Handle login error
   };
 
   const handleLogout = () => {
-    // Handle logout logic
     setUser(null);
     setDropdownVisible(false);
   };
@@ -136,11 +141,15 @@ const Navbar: React.FC = () => {
       <DropdownMenu visible={dropdownVisible}>
         <DropdownItem onClick={() => console.log('Navigate to profile')}>
           <FontAwesomeIcon icon={faUser} className="icon" />
-          My Profile
+          <div className="text">
+            <span>My Profile</span>
+          </div>
         </DropdownItem>
         <DropdownItem className="logout" onClick={handleLogout}>
           <FontAwesomeIcon icon={faSignOutAlt} className="icon" />
-          Logout
+          <div className="text">
+            <span>Logout</span>
+          </div>
         </DropdownItem>
       </DropdownMenu>
     </NavbarContainer>
