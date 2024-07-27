@@ -1,4 +1,3 @@
-// src/pages/_document.tsx
 
 import { Html, Head, Main, NextScript } from "next/document";
 import type { DocumentContext, DocumentInitialProps, DocumentProps } from 'next/document';
