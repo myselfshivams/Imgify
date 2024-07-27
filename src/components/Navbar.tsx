@@ -29,7 +29,6 @@ const Logo = styled.h1`
 
 const ProfileButton = styled.div`
   font-family: 'Michroma', sans-serif;
-  padding: 8px 16px;
   border: none;
   border-radius: 50%;
   background: linear-gradient(45deg, #000000, #434343, #000000);
@@ -53,16 +52,13 @@ const Navbar: React.FC = () => {
   const handleSuccess = (credentialResponse: any) => {
     console.log('Login successful:', credentialResponse);
 
-    // Extract the user's name from the credential response
+    // Extract the user's name and profile picture from the credential response
     const userName = credentialResponse?.profile?.name || '';
-    const firstNameInitial = userName.charAt(0).toUpperCase();
-
-    // Fetch the profile image based on the initial
-    const imageUrl = `/api/${firstNameInitial}`;
+    const profilePicture = credentialResponse?.profile?.picture || '';
 
     setUser({
       name: userName,
-      profileImage: imageUrl,
+      profileImage: profilePicture,
     });
   };
 
@@ -76,7 +72,8 @@ const Navbar: React.FC = () => {
       <Logo>Imgify</Logo>
       {user ? (
         <ProfileButton style={{ backgroundImage: `url(${user.profileImage})` }}>
-          {user.name ? user.name.charAt(0).toUpperCase() : ''}
+          {/* Display the user's initial or profile picture */}
+          {!user.profileImage && user.name ? user.name.charAt(0).toUpperCase() : ''}
         </ProfileButton>
       ) : (
         <GoogleLogin
