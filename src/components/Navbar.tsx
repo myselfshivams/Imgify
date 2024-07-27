@@ -57,7 +57,8 @@ const DropdownMenu = styled.div<DropdownMenuProps>`
   position: absolute;
   top: 60px; /* Adjust based on your layout */
   right: 20px; /* Adjust based on your layout */
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: ${({ visible }) => (visible ? 'block' : 'none')};
