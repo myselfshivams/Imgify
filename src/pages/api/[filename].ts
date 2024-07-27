@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createCanvas } from 'canvas';
+import { createCanvas, loadImage, registerFont } from 'canvas';
+import path from 'path';
 
 const gradients: Record<string, string[]> = {
   'A': ['#FF0000', '#FFFF00'],
@@ -30,7 +31,6 @@ const gradients: Record<string, string[]> = {
   'Z': ['#FF1493', '#00CED1'],
 };
 
-
 function getLetterAfter(letters: string, offset: number): string {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let index = alphabet.indexOf(letters);
@@ -57,6 +57,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
+
+  const fontPath = path.join(process.cwd(), 'public', 'fonts', 'Roboto-Medium.ttf');
+  registerFont(fontPath, { family: 'Roboto' });
+
   const canvas = createCanvas(800, 400);
   const ctx = canvas.getContext('2d');
 
@@ -74,7 +78,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.font = 'bold 100px Arial';
+  ctx.font = 'bold 100px Roboto';
   ctx.fillStyle = '#000000';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -83,4 +87,3 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Content-Type', 'image/png');
   canvas.createPNGStream().pipe(res);
 }
-
