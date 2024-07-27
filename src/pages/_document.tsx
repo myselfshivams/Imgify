@@ -1,4 +1,3 @@
-
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
@@ -26,7 +25,17 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+        
+          <link rel="icon" href="/imgify.png" />
+      
+          <link rel="icon" type="image/png" href="/imgify.png" sizes="16x16" />
+          <link rel="icon" type="image/png" href="/imgify.png" sizes="32x32" />
+          <link rel="icon" type="image/png" href="/imgify.png" sizes="96x96" />
+          <link rel="apple-touch-icon" href="/imgify.png" />
+          <meta name="msapplication-TileImage" content="/imgify.png" />
+          <meta name="theme-color" content="#ffffff" />
+        </Head>
         <body>
           <Main />
           <NextScript />

@@ -83,3 +83,4 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   res.setHeader('Content-Type', 'image/png');
   canvas.createPNGStream().pipe(res);
 }
+

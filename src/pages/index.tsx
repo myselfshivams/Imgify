@@ -1,26 +1,20 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faSignInAlt, faDownload, faUsers } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/Home.module.css'; 
 import Navbar from '@/components/Navbar';
 
 const useCases = [
   {
     title: 'Dynamic Branding and Customization',
-    icon: faStar, 
   },
   {
     title: 'Login and Signup Pages',
-    icon: faSignInAlt,
   },
   {
     title: 'Downloadable Custom Images',
-    icon: faDownload,
   },
   {
     title: 'Interactive User Interfaces',
-    icon: faUsers,
   },
 ];
 
@@ -41,10 +35,9 @@ const IndexPage = () => {
         <div className={styles.cardContainer}>
           {useCases.map((useCase, index) => (
             <div className={styles.card} key={index}>
-              <FontAwesomeIcon 
-                icon={useCase.icon} 
-                className={styles.cardIcon} 
-              />
+              <div className={styles.cardIconPlaceholder}>
+                {/* Placeholder for icons or you can use text here */}
+              </div>
               <h2 className={styles.cardTitle}>{useCase.title}</h2>
             </div>
           ))}
