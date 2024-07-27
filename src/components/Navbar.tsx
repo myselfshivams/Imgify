@@ -52,13 +52,16 @@ const Navbar: React.FC = () => {
   const handleSuccess = (credentialResponse: any) => {
     console.log('Login successful:', credentialResponse);
 
+    // Check the structure of credentialResponse
+    console.log('Credential Response:', credentialResponse);
+
     // Extract the user's name and profile picture from the credential response
-    const userName = credentialResponse?.profile?.name || '';
-    const profilePicture = credentialResponse?.profile?.picture || '';
+    const userName = credentialResponse?.profileObj?.name || '';
+    const profilePicture = credentialResponse?.profileObj?.picture || '';
 
     setUser({
       name: userName,
-      profileImage: profilePicture,
+      profileImage: profilePicture || '/user.jpg', // Fallback to default image
     });
   };
 
@@ -72,7 +75,7 @@ const Navbar: React.FC = () => {
       <Logo>Imgify</Logo>
       {user ? (
         <ProfileButton style={{ backgroundImage: `url(${user.profileImage})` }}>
-          {/* Display the user's initial or profile picture */}
+          {/* Display the user's initial if profile image is not available */}
           {!user.profileImage && user.name ? user.name.charAt(0).toUpperCase() : ''}
         </ProfileButton>
       ) : (
