@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import CustomCursor from '../components/customCursor';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <>
+    <GoogleOAuthProvider clientId="867667324631-qgmm9ig95gc5rjgni19skaldrce49uv6.apps.googleusercontent.com">
       <Head>
         <title>Imgify</title>
         <meta name="description" content="Create stunning, custom images with our advanced image generation platform. Whether for personal, professional, or promotional use, our tool offers unique and dynamic image designs." />
@@ -38,6 +39,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <CustomCursor />
       <Component {...pageProps} />
-    </>
+    </GoogleOAuthProvider>
   );
 }

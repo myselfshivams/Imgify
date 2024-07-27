@@ -1,6 +1,6 @@
-
 import React from 'react';
 import styled from 'styled-components';
+import { GoogleLogin } from '@react-oauth/google';
 
 const NavbarContainer = styled.nav`
   position: fixed;
@@ -47,10 +47,24 @@ const LoginButton = styled.button`
 `;
 
 const Navbar: React.FC = () => {
+  const handleSuccess = (response: any) => {
+    console.log('Login Success:', response);
+    // Handle successful login here
+  };
+
+  const handleError = (error: any) => {
+    console.error('Login Error:', error);
+    // Handle login error here
+  };
+
   return (
     <NavbarContainer>
       <Logo>Imgify</Logo>
-      <LoginButton>Login</LoginButton>
+      <GoogleLogin
+        onSuccess={handleSuccess}
+        onError={handleError}
+        style={{ border: 'none', background: 'none', padding: '0', margin: '0' }}
+      />
     </NavbarContainer>
   );
 };

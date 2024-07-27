@@ -36,7 +36,7 @@ const IndexPage = () => {
           {useCases.map((useCase, index) => (
             <div className={styles.card} key={index}>
               <div className={styles.cardIconPlaceholder}>
-                {/* Placeholder for icons or you can use text here */}
+             
               </div>
               <h2 className={styles.cardTitle}>{useCase.title}</h2>
             </div>
