@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost'], // Add other domains as needed
+    domains: ['localhost', 'imgify.itshivam.me'], 
   },
 };
 
